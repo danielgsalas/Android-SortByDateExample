@@ -20,20 +20,29 @@ public class MillisComparator implements Comparator<Date> {
     @Override
     public int compare(Date dateOne, Date dateTwo) {
 
+        long difference = 0;
+
         if (dateOne != null && dateTwo != null) {
 
             long millisOne = dateOne.getTime();
             long millisTwo = dateTwo.getTime();
 
             if (mSortAscending) {
-                return (int)(millisOne - millisTwo);
+                difference = millisOne - millisTwo;
             }
             else {
-                return (int)(millisTwo - millisOne);
+                difference = millisTwo - millisOne;
+            }
+
+            if (difference > Integer.MAX_VALUE) {
+                difference = 1;
+            }
+            else if (difference < Integer.MIN_VALUE) {
+                difference = -1;
             }
         }
 
-        return 0;
+        return (int)difference;
     }
 
     @Override

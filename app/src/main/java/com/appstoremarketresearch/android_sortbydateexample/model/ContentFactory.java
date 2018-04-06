@@ -14,17 +14,21 @@ public class ContentFactory {
         long millisPerSecond = 1000;
         long secondsPerMinute = 60;
         long minutesPerHour = 60;
-        long totalHours = 24;
-        long totalMillis = totalHours * minutesPerHour * secondsPerMinute * millisPerSecond;
+        long hoursPerDay = 24;
+        long millisPerDay = hoursPerDay * minutesPerHour * secondsPerMinute * millisPerSecond;
 
         long today = System.currentTimeMillis();
-        long yesterday = today - totalMillis;
-        long tomorrow = today + totalMillis;
+        long yesterday = today - millisPerDay;
+        long tomorrow = today + millisPerDay;
+        long oneYearAgo = today - millisPerDay * 365L;
+        long tenYearsAgo = today - millisPerDay * 365L * 10L;
 
         List<Date> dates = new ArrayList<>();
         dates.add(new Date(today));
         dates.add(new Date(yesterday));
+        dates.add(new Date(tenYearsAgo));
         dates.add(new Date(tomorrow));
+        dates.add(new Date(oneYearAgo));
 
         return dates;
     }
