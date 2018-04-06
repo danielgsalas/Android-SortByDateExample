@@ -7,21 +7,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.appstoremarketresearch.android_sortbydateexample.R;
-import com.appstoremarketresearch.android_sortbydateexample.model.DummyContent.DummyItem;
 
+import java.util.Date;
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display Dates and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
  */
 public class DateListAdapter extends RecyclerView.Adapter<DateListAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<Date> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public DateListAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public DateListAdapter(List<Date> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -36,8 +35,7 @@ public class DateListAdapter extends RecyclerView.Adapter<DateListAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mContentView.setText(mValues.get(position).toString());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,14 +56,12 @@ public class DateListAdapter extends RecyclerView.Adapter<DateListAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public Date mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
             mContentView = (TextView) view.findViewById(R.id.content);
         }
 

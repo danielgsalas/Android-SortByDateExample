@@ -1,6 +1,6 @@
 package com.appstoremarketresearch.android_sortbydateexample.view;
 
-import com.appstoremarketresearch.android_sortbydateexample.model.DummyContent;
+import java.util.Date;
 
 /**
  * This interface must be implemented by activities that contain this
@@ -14,5 +14,5 @@ import com.appstoremarketresearch.android_sortbydateexample.model.DummyContent;
  */
 public interface OnListFragmentInteractionListener {
     // TODO: Update argument type and name
-    void onListFragmentInteraction(DummyContent.DummyItem item);
+    void onListFragmentInteraction(Date item);
 }

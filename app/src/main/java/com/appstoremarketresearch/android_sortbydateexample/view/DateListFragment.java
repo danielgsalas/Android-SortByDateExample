@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.appstoremarketresearch.android_sortbydateexample.R;
-import com.appstoremarketresearch.android_sortbydateexample.model.DummyContent;
+import com.appstoremarketresearch.android_sortbydateexample.model.ContentFactory;
 
 /**
  * A fragment representing a list of Items.
@@ -55,7 +55,7 @@ public class DateListFragment extends Fragment {
             }
 
             OnListFragmentInteractionListener mListener = (OnListFragmentInteractionListener)getActivity();
-            recyclerView.setAdapter(new DateListAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new DateListAdapter(ContentFactory.ITEMS, mListener));
         }
         return view;
     }
