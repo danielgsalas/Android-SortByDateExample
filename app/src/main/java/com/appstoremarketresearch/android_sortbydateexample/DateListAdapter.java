@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.appstoremarketresearch.android_sortbydateexample.ItemFragment.OnListFragmentInteractionListener;
 import com.appstoremarketresearch.android_sortbydateexample.dummy.DummyContent.DummyItem;
 
 import java.util.List;
@@ -29,7 +28,7 @@ public class DateListAdapter extends RecyclerView.Adapter<DateListAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_item, parent, false);
+                .inflate(R.layout.date_list_row, parent, false);
         return new ViewHolder(view);
     }
 
