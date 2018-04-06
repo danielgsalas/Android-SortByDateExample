@@ -25,7 +25,7 @@ public class DateComparator implements Comparator<Date>{
                 return dateOne.compareTo(dateTwo);
             }
             else {
-                return dateOne.compareTo(dateTwo) * -1;
+                return dateTwo.compareTo(dateOne);
             }
         }
 
