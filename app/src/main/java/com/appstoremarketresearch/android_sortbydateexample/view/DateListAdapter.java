@@ -1,4 +1,4 @@
-package com.appstoremarketresearch.android_sortbydateexample;
+package com.appstoremarketresearch.android_sortbydateexample.view;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,7 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.appstoremarketresearch.android_sortbydateexample.dummy.DummyContent.DummyItem;
+import com.appstoremarketresearch.android_sortbydateexample.R;
+import com.appstoremarketresearch.android_sortbydateexample.model.DummyContent.DummyItem;
 
 import java.util.List;
 

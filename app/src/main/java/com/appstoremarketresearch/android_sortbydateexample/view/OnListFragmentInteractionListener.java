@@ -1,6 +1,6 @@
-package com.appstoremarketresearch.android_sortbydateexample;
+package com.appstoremarketresearch.android_sortbydateexample.view;
 
-import com.appstoremarketresearch.android_sortbydateexample.dummy.DummyContent;
+import com.appstoremarketresearch.android_sortbydateexample.model.DummyContent;
 
 /**
  * This interface must be implemented by activities that contain this

@@ -1,4 +1,4 @@
-package com.appstoremarketresearch.android_sortbydateexample.dummy;
+package com.appstoremarketresearch.android_sortbydateexample.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
