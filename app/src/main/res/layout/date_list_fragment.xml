@@ -1,13 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
-    android:name="com.appstoremarketresearch.android_sortbydateexample.DateListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    app:layoutManager="LinearLayoutManager"
-    tools:context="com.appstoremarketresearch.android_sortbydateexample.view.DateListFragment"
-    tools:listitem="@layout/date_list_row" />
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/button_sort_by_date"
+            android:background="@color/colorPrimary"
+            android:layout_marginRight="1dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="SORT BY DATE"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/button_sort_by_millis"
+            android:background="@color/colorPrimary"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="SORT BY MILLIS"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list"
+        android:name="com.appstoremarketresearch.android_sortbydateexample.DateListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="com.appstoremarketresearch.android_sortbydateexample.view.DateListFragment"
+        tools:listitem="@layout/date_list_row" />
+
+</LinearLayout>
+

@@ -10,12 +10,7 @@ import java.util.List;
  */
 public class ContentFactory {
 
-    /**
-     * An array of dates.
-     */
-    public static final List<Date> ITEMS = new ArrayList<>();
-
-    static {
+    public static List<Date> buildList() {
         long millisPerSecond = 1000;
         long secondsPerMinute = 60;
         long minutesPerHour = 60;
@@ -26,12 +21,11 @@ public class ContentFactory {
         long yesterday = today - totalMillis;
         long tomorrow = today + totalMillis;
 
-        addItem( new Date(today));
-        addItem( new Date(yesterday));
-        addItem( new Date(tomorrow));
-    }
+        List<Date> dates = new ArrayList<>();
+        dates.add(new Date(today));
+        dates.add(new Date(yesterday));
+        dates.add(new Date(tomorrow));
 
-    private static void addItem(Date date) {
-        ITEMS.add(date);
+        return dates;
     }
 }
