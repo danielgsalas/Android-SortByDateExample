@@ -1,3 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Android-SortByDateExample</string>
+    <string-array name="date_type_options">
+        <item>java.util.Date</item>
+        <item>java.sql.Date</item>
+    </string-array>
 </resources>
