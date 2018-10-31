@@ -13,6 +13,5 @@ import java.util.Date;
  * >Communicating with Other Fragments</a> for more information.
  */
 public interface OnListFragmentInteractionListener {
-    // TODO: Update argument type and name
-    void onListFragmentInteraction(Date item);
+    void onListFragmentInteraction(Object item);
 }

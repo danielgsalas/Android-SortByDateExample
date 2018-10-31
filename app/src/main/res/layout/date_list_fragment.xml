@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,40 +7,46 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button_sort_by_date"
-            android:background="@color/colorPrimary"
-            android:layout_marginRight="1dp"
+        <Spinner
+            android:id="@+id/date_type_spinner"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/sort_by_date_button"
+            android:background="@color/colorPrimary"
+            android:layout_width="@dimen/sort_button_width"
+            android:layout_height="@dimen/sort_button_height"
+            android:padding="@dimen/sort_button_padding"
             android:text="SORT BY DATE"
             android:textColor="@android:color/white" />
 
         <Button
-            android:id="@+id/button_sort_by_millis"
+            android:id="@+id/sort_by_millis_button"
             android:background="@color/colorPrimary"
             android:layout_marginLeft="1dp"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/sort_button_width"
+            android:layout_height="@dimen/sort_button_height"
+            android:padding="@dimen/sort_button_padding"
             android:text="SORT BY MILLIS"
             android:textColor="@android:color/white" />
 
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/list"
+        android:id="@+id/recycler_view"
         android:name="com.appstoremarketresearch.android_sortbydateexample.DateListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        app:layoutManager="LinearLayoutManager"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         tools:context="com.appstoremarketresearch.android_sortbydateexample.view.DateListFragment"
         tools:listitem="@layout/date_list_row" />
 
 </LinearLayout>
-

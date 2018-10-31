@@ -10,19 +10,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.appstoremarketresearch.android_sortbydateexample.R;
+import com.appstoremarketresearch.android_sortbydateexample.comparator.DateComparator;
+import com.appstoremarketresearch.android_sortbydateexample.comparator.MillisComparator;
 import com.appstoremarketresearch.android_sortbydateexample.model.ContentFactory;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 /**
  * A fragment representing a list of Items.
- * <p/>
+ *
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
@@ -31,8 +35,11 @@ public class DateListFragment extends Fragment {
     private boolean mSortAscending = true;
     private int mColumnCount = 1;
 
-    private List<Date> mDates;
+    private List<Object> mDates;
     private OnListFragmentInteractionListener mListener;
+    private Spinner mSpinner;
+    private RecyclerView mRecyclerView;
+    private View mTopLevelView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -42,40 +49,72 @@ public class DateListFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
     public View onCreateView(
         LayoutInflater inflater,
         ViewGroup container,
         Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.date_list_fragment, container, false);
-        RecyclerView.Adapter adapter = initializeRecyclerView(view);
-        initializeSortButtons(view, adapter);
+        mTopLevelView = inflater.inflate(R.layout.date_list_fragment, container, false);
+        mSpinner = initializeDateTypeOptions(mTopLevelView);
 
-        return view;
+        RecyclerView.Adapter adapter = initializeRecyclerView(mTopLevelView);
+        initializeSortButtons(mTopLevelView, adapter);
+
+        return mTopLevelView;
+    }
+
+    /**
+     * https://developer.android.com/guide/topics/ui/controls/spinner
+     */
+    private Spinner initializeDateTypeOptions(final View topLevelView) {
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                getActivity(),
+                R.array.date_type_options,
+                android.R.layout.simple_spinner_item);
+
+        Spinner spinner = topLevelView.findViewById(R.id.date_type_spinner);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(adapter);
+
+        return spinner;
     }
 
     /**
      * initializeRecyclerView
      */
-    private RecyclerView.Adapter initializeRecyclerView(View view) {
+    private RecyclerView.Adapter initializeRecyclerView(View topLevelView) {
 
-        Context context = view.getContext();
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.list);
+        Context context = topLevelView.getContext();
+        mRecyclerView = topLevelView.findViewById(R.id.recycler_view);
 
         if (mColumnCount <= 1) {
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         } else {
-            recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+            mRecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+        }
+
+        int startPosition = 0;
+        return initializeRecyclerView(mRecyclerView, startPosition);
+    }
+
+    /**
+     * initializeRecyclerView
+     */
+    private RecyclerView.Adapter initializeRecyclerView(RecyclerView recyclerView, int position) {
+
+        switch(position) {
+            case 0:
+                mDates = ContentFactory.buildJavaUtilDateList();
+                break;
+
+            case 1:
+                mDates = ContentFactory.buildJavaSqlDateList();
+                break;
         }
 
         OnListFragmentInteractionListener mListener = (OnListFragmentInteractionListener)getActivity();
-        mDates = ContentFactory.buildList();
         RecyclerView.Adapter adapter = new DateListAdapter(mDates, mListener);
         recyclerView.setAdapter(adapter);
 
@@ -86,10 +125,10 @@ public class DateListFragment extends Fragment {
      * initializeSortButtons
      */
     private void initializeSortButtons(
-        View view,
+        View topLevelView,
         final RecyclerView.Adapter adapter) {
 
-        Button button = (Button)view.findViewById(R.id.button_sort_by_date);
+        Button button = topLevelView.findViewById(R.id.sort_by_date_button);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +140,7 @@ public class DateListFragment extends Fragment {
             }
         });
 
-        button = (Button)view.findViewById(R.id.button_sort_by_millis);
+        button = topLevelView.findViewById(R.id.sort_by_millis_button);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +168,30 @@ public class DateListFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (mSpinner != null && mRecyclerView != null &&
+            mSpinner.getOnItemClickListener() == null) {
+
+            mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView,
+                                           View view, int position, long id) {
+
+                    RecyclerView.Adapter adapter = initializeRecyclerView(mRecyclerView, position);
+                    initializeSortButtons(mTopLevelView, adapter);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+                    // NO OP
+                }
+            });
+        }
     }
 
     /**

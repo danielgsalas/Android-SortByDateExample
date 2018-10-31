@@ -7,8 +7,17 @@ android {
         applicationId "com.appstoremarketresearch.android_sortbydateexample"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+
+        /*
+         *  VERSION HISTORY
+         *
+         *  code  name  description
+         *  ----  ----  ---------------------------------------------------------------
+         *     1   1.0  Initial version with sortable list of java.util.Dates
+         *     2   1.1  Added option of java.sql.Dates
+         */
+        versionCode 2
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

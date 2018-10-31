@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.appstoremarketresearch.android_sortbydateexample.R;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,11 +16,12 @@ import java.util.List;
  */
 public class DateListAdapter extends RecyclerView.Adapter<DateListAdapter.ViewHolder> {
 
-    private final List<Date> mValues;
+    private final List<Object> mDates;
     private final OnListFragmentInteractionListener mListener;
 
-    public DateListAdapter(List<Date> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
+    public DateListAdapter(List<Object> dates,
+                           OnListFragmentInteractionListener listener) {
+        mDates = dates;
         mListener = listener;
     }
 
@@ -34,8 +34,11 @@ public class DateListAdapter extends RecyclerView.Adapter<DateListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mContentView.setText(mValues.get(position).toString());
+        holder.mDate = mDates.get(position);
+
+        String text = holder.mDate.toString() + " (";
+        text += holder.mDate.getClass().getName() + ")";
+        holder.mContentView.setText(text);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +46,7 @@ public class DateListAdapter extends RecyclerView.Adapter<DateListAdapter.ViewHo
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                    mListener.onListFragmentInteraction(holder.mDate);
                 }
             }
         });
@@ -51,18 +54,18 @@ public class DateListAdapter extends RecyclerView.Adapter<DateListAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return mDates.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mContentView;
-        public Date mItem;
+        public Object mDate;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mContentView = view.findViewById(R.id.content);
         }
 
         @Override

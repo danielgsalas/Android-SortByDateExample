@@ -1,4 +1,4 @@
-package com.appstoremarketresearch.android_sortbydateexample.view;
+package com.appstoremarketresearch.android_sortbydateexample.comparator;
 
 import java.util.Comparator;
 import java.util.Date;

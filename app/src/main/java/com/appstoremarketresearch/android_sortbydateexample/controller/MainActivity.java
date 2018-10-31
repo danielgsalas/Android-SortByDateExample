@@ -3,11 +3,12 @@ package com.appstoremarketresearch.android_sortbydateexample.controller;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import java.util.Date;
-
 import com.appstoremarketresearch.android_sortbydateexample.R;
 import com.appstoremarketresearch.android_sortbydateexample.view.OnListFragmentInteractionListener;
 
+/**
+ * MainActivity
+ */
 public class MainActivity
     extends AppCompatActivity
     implements OnListFragmentInteractionListener {
@@ -19,7 +20,7 @@ public class MainActivity
     }
 
     @Override
-    public void onListFragmentInteraction(Date item) {
-
+    public void onListFragmentInteraction(Object date) {
+        // NO OP
     }
 }

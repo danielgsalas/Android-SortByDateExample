@@ -1,7 +1,6 @@
 package com.appstoremarketresearch.android_sortbydateexample.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -10,25 +9,61 @@ import java.util.List;
  */
 public class ContentFactory {
 
-    public static List<Date> buildList() {
-        long millisPerSecond = 1000;
-        long secondsPerMinute = 60;
-        long minutesPerHour = 60;
-        long hoursPerDay = 24;
-        long millisPerDay = hoursPerDay * minutesPerHour * secondsPerMinute * millisPerSecond;
+    private static final long MILLIS_PER_SECOND = 1000;
+    private static final long SECONDS_PER_MINUTE = 60;
+    private static final long MINUTES_PER_HOUR = 60;
+    private static final long HOURS_PER_DAY = 24;
+
+    private static final long MILLIS_PER_DAY =
+        HOURS_PER_DAY * MINUTES_PER_HOUR * SECONDS_PER_MINUTE * MILLIS_PER_SECOND;
+
+    /**
+     * buildMillisecondsList
+     */
+    private static List<Long> buildMillisecondsList() {
 
         long today = System.currentTimeMillis();
-        long yesterday = today - millisPerDay;
-        long tomorrow = today + millisPerDay;
-        long oneYearAgo = today - millisPerDay * 365L;
-        long tenYearsAgo = today - millisPerDay * 365L * 10L;
+        long yesterday = today - MILLIS_PER_DAY;
+        long tomorrow = today + MILLIS_PER_DAY;
+        long oneYearAgo = today - MILLIS_PER_DAY * 365L;
+        long tenYearsAgo = today - MILLIS_PER_DAY * 365L * 10L;
 
-        List<Date> dates = new ArrayList<>();
-        dates.add(new Date(today));
-        dates.add(new Date(yesterday));
-        dates.add(new Date(tenYearsAgo));
-        dates.add(new Date(tomorrow));
-        dates.add(new Date(oneYearAgo));
+        List<Long> millis = new ArrayList<>();
+        millis.add(today);
+        millis.add(yesterday);
+        millis.add(tomorrow);
+        millis.add(oneYearAgo);
+        millis.add(tenYearsAgo);
+
+        return millis;
+    }
+
+    /**
+     * buildJavaSqlDateList
+     */
+    public static List<Object> buildJavaSqlDateList() {
+
+        List<Object> dates = new ArrayList<>();
+        List<Long> millis = buildMillisecondsList();
+
+        for (Long m : millis) {
+            dates.add(new java.sql.Date(m));
+        }
+
+        return dates;
+    }
+
+    /**
+     * buildJavaUtilDateList
+     */
+    public static List<Object> buildJavaUtilDateList() {
+
+        List<Object> dates = new ArrayList<>();
+        List<Long> millis = buildMillisecondsList();
+
+        for (Long m : millis) {
+            dates.add(new java.util.Date(m));
+        }
 
         return dates;
     }
